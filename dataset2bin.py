@@ -4,6 +4,8 @@ import argparse
 import pickle
 import sys
 import os
+import joblib
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'eval'))
 import lfw
 
@@ -30,6 +32,7 @@ for path in lfw_paths:
     i+=1
     if i%1000==0:
       print('loading dataset', i)
-
-with open(args.output, 'wb') as f:
-  pickle.dump((lfw_bins, issame_list), f, protocol=pickle.HIGHEST_PROTOCOL)
+with open(args.output, 'ab') as f:
+  joblib.dump((lfw_bins, issame_list), f)
+#with open(args.output, 'wb') as f:
+#  pickle.dump((lfw_bins, issame_list), f, protocol=pickle.HIGHEST_PROTOCOL)
